@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nischal ❤️ Pritika – Memories & How Was I? 💕</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #fff0f5 0%, #ffe4e9 100%);
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+    h1 {
+      font-size: 3.5rem;
+      color: #e91e63;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .heart { color: #e91e63; font-size: 1.5em; margin: 0 10px; }
+    .subtitle {
+      font-size: 1.4rem;
+      color: #555;
+      margin-bottom: 50px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin: 40px 0 80px;
+    }
+    .photo-card {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+      background: white;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .photo-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(233,30,99,0.2);
+    }
+    .photo-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    /* Questionnaire section */
+    .questionnaire {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      margin-bottom: 60px;
+    }
+    .questionnaire h1 {
+      font-size: 2.6rem;
+      margin-bottom: 10px;
+    }
+    .questionnaire .subtitle {
+      margin-bottom: 40px;
+    }
+    .question {
+      margin: 40px 0;
+      padding: 28px;
+      background: #fff8fa;
+      border-radius: 12px;
+      border-left: 5px solid #ff9ab5;
+    }
+    .question h2 {
+      color: #d4415f;
+      margin-top: 0;
+      font-size: 1.45rem;
+    }
+    textarea {
+      width: 100%;
+      min-height: 110px;
+      padding: 14px;
+      border: 1px solid #ffb3c8;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      resize: vertical;
+      margin-top: 10px;
+    }
+    input[type="file"] {
+      margin: 14px 0 10px;
+      font-size: 1rem;
+    }
+    .photos-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .photos-preview img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .thanks {
+      text-align: center;
+      font-size: 1.4rem;
+      margin: 50px 0 30px;
+      color: #444;
+    }
+    .submit-area {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .submit-btn {
+      background: linear-gradient(135deg, #e91e63, #ff5c8d);
+      color: white;
+      border: none;
+      padding: 16px 48px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(233,30,99,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-weight: 600;
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(233,30,99,0.4);
+    }
+    .footer {
+      text-align: center;
+      padding: 50px 20px;
+      color: #777;
+      font-size: 1rem;
+    }
+    /* Music Controls */
+    #music-controls {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(233, 30, 99, 0.85);
+      color: white;
+      padding: 12px 18px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      z-index: 999;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+    }
+    #music-controls:hover {
+      background: #e91e63;
+      transform: scale(1.05);
+    }
+    #music-controls.muted::after {
+      content: " (muted)";
+      font-size: 0.9rem;
+    }
+    /* Success message */
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      background: #fff8fa;
+      border-radius: 12px;
+      margin: 30px 0;
+    }
+    .success-message h2 {
+      color: #e91e63;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .success-message p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+    @media (max-width: 700px) {
+      h1 { font-size: 2.6rem; }
+      .questionnaire { padding: 28px; }
+      #music-controls { bottom: 15px; right: 15px; padding: 10px 15px; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="audio/romantic-piano.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<div class="container">
+
+  <!-- Gallery Section -->
+  <header>
+    <h1>Nischal <span class="heart">&#10084;&#65039;</span> Pritika</h1>
+    <div class="subtitle">Our little forever moments &#9825;</div>
+  </header>
+
+  <section class="gallery">
+    <div class="photo-card">
+      <img src="images/647185062_1837911006898317_8214845242508033129_n.jpg" alt="Our memory together">
+    </div>
+    <div class="photo-card">
+      <img src="images/647200596_1241754788106286_6225637629580036342_n.jpg" alt="Our memory together">
+    </div>
+    <div class="photo-card">
+      <img src="images/648349453_921357267316196_4474870770223555309_n.jpg" alt="Our memory together">
+    </div>
+    <div class="photo-card">
+      <img src="images/648442396_1497139178408928_1997354216271532111_n.jpg" alt="Our memory together">
+    </div>
+    <div class="photo-card">
+      <img src="images/649125669_940521728563243_4332830519465057471_n.jpg" alt="Our memory together">
+    </div>
+  </section>
+
+  <!-- Questionnaire Section -->
+  <section class="questionnaire">
+    <h1>How was I, love? &#128149;</h1>
+    <p class="subtitle">Answer whenever your heart feels like talking... no rush, just your truth</p>
+
+    <form id="loveForm" name="love-responses" method="POST" data-netlify="true" autocomplete="off">
+
+      <div class="question">
+        <h2>1. How was I on your birthday? &#127874;</h2>
+        <p>What moment stuck with you? What made you smile... or what could I do even better next time?</p>
+        <textarea name="birthday" placeholder="Tell me anything you remember... even one tiny detail" rows="5"></textarea>
+        <label>Attach photos from that day (optional, multiple ok):</label>
+        <input type="file" name="birthdayPhotos" accept="image/*" multiple />
+        <div class="photos-preview" id="preview-birthday"></div>
+      </div>
+
+      <div class="question">
+        <h2>2. What does being with me feel like to you right now? &#129392;</h2>
+        <p>One word... one sentence... or pour it all out. Whatever is real today.</p>
+        <textarea name="relationshipFeeling" placeholder="Safe... exciting... peaceful... chaotic in the best way... deeply loved..." rows="6"></textarea>
+      </div>
+
+      <div class="question">
+        <h2>3. What's one thing I do that makes you feel truly loved? &#128140;</h2>
+        <textarea name="makesMeFeelLoved" placeholder="Big or very small - it all counts" rows="4"></textarea>
+      </div>
+
+      <div class="question">
+        <h2>4. Is there something I could understand better about you? &#127769;</h2>
+        <textarea name="wishYouUnderstood" placeholder="Something I sometimes miss or don't fully get yet..." rows="4"></textarea>
+      </div>
+
+      <div class="question">
+        <h2>5. One photo (or more) that feels like "us" right now &#128248;</h2>
+        <label>Pick the picture(s) that scream "this is us" today</label>
+        <input type="file" name="usPhotos" accept="image/*" multiple />
+        <div class="photos-preview" id="preview-us"></div>
+      </div>
+
+      <div class="thanks">
+        Thank you for opening your heart to me.<br>
+        I love you more than words <span class="heart">&#10084;&#65039;</span>
+      </div>
+
+      <div class="submit-area">
+        <button type="submit" class="submit-btn">Send My Answers &#128149;</button>
+      </div>
+
+    </form>
+
+    <div class="success-message" id="successMessage">
+      <h2>&#10084;&#65039; Received with love!</h2>
+      <p>Your words mean the world to me. Thank you for being so open and beautiful.</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    Made with all my love &bull; Nischal for Pritika &bull; March 2026
+  </div>
+
+</div>
+
+<!-- Music Control Button -->
+<div id="music-controls">&#127925; Play Music</div>
+
+<script>
+// Music control
+const audio = document.getElementById('bgMusic');
+const btn = document.getElementById('music-controls');
+
+btn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play().catch(() => {
+      alert("Tap anywhere on the page first to allow sound (browser policy)");
+    });
+    btn.textContent = '\u{1F3B5} Pause Music';
+    btn.classList.remove('muted');
+  } else {
+    audio.pause();
+    btn.textContent = '\u{1F3B5} Play Music';
+  }
+});
+
+// Soft volume
+audio.volume = 0.3;
+
+// Live photo preview
+document.querySelectorAll('input[type="file"]').forEach(input => {
+  input.addEventListener('change', function() {
+    const previewId = 'preview-' + this.name.replace('Photos','').toLowerCase();
+    const container = document.getElementById(previewId);
+    if (!container) return;
+    container.innerHTML = '';
+    [...this.files].forEach(file => {
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        const img = document.createElement('img');
+        img.src = ev.target.result;
+        container.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+});
+
+// Handle form submission
+const form = document.getElementById('loveForm');
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(formData).toString()
+  }).then(() => {
+    form.style.display = 'none';
+    document.getElementById('successMessage').style.display = 'block';
+    window.scrollTo({ top: document.querySelector('.questionnaire').offsetTop, behavior: 'smooth' });
+  }).catch(() => {
+    alert('Something went wrong. Please try again!');
+  });
+});
+</script>
+
+</body>
+</html>
